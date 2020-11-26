@@ -1,0 +1,25 @@
+
+.global 0 
+
+.param W1=100 L1=0.18 W2=100 L2=0.18 W3=100 L3=0.18 C=0.1
+
+M1 vout v1_2 vdd vdd CMOSP w='W1' l='L1'
+M2 v1_2 v1_2 vdd vdd CMOSP w='W1' l='L1'
+M3 v1_2 vinp v2_3 v2_3 CMOSN w='W2' l='L2'
+M4 vout vinn v2_3 v2_3 CMOSN w='W2' l='L2'
+M5 v2_3 vb 0 0 CMOSN w='W3' l='L3'
+C0 vout 0 'C0 '
+
+VDD vdd 0 dc 1.8
+VINP vinp 0 dc 0.7 ac 0.1 180
+VINN vinn 0 dc 0.7 ac 0.1 
+VB vb 0 dc 0.7
+
+
+.ac dec 10 100 1G
+
+.data list W1 L1 W2 L2 W3 L3 C0
+xxPARAMxx
+.enddata
+
+.printfile ac v(vout) file=acResult

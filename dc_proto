@@ -1,0 +1,29 @@
+
+.option compat
+.lib model
+
+.global 0 
+
+.param W1=100 L1=0.18 W2=100 L2=0.18 W3=100 L3=0.18 
+
+
+
+M1 vout v1_2 vdd vdd CMOSP w='W1' l='L1'
+M2 v1_2 v1_2 vdd vdd CMOSP w='W1' l='L1'
+M3 v1_2 vinp v2_3 v2_3 CMOSN w='W2' l='L2'
+M4 vout vinn v2_3 v2_3 CMOSN w='W2' l='L2'
+M5 v2_3 vb 0 0 CMOSN w='W3' l='L3'
+
+VDD vdd 0 dc 1.8
+VINP vinp 0 dc 0.7
+VINN vinn 0 dc 0.7
+VB vb 0 dc 0.7
+
+.dc data=list
+.data list W1 L1 W2 L2 W3 L3
+
+xxPARAMxx
+.enddata
+
+.printfile dc v(vout) file=dcResult
+.printfile dc i(vdd) file=dcResult
