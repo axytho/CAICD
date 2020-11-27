@@ -16,7 +16,7 @@ function [population,it] = myGA(f,V,M,lb,ub)
 	P = 0.5;     % probability of recombination
     spread = 0.6;
 	verbose = true; % (true) plots each iteration
-    
+    frontStop = true;
     %% PARAMETER SWEEP
     parameterResult = [];
     previousIntegral = 0;
