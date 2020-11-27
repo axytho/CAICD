@@ -1,0 +1,26 @@
+BEGIN {
+  	i=1;
+  	flagf=1;
+}
+{ 	
+	if(flagf==1)
+	{
+		if( substr($0,0,1)!="#" )
+		{
+			print $0 > "tmp/f"i;		
+			flagf=0;
+		}
+	}
+	else
+	{
+		if( substr($0,0,1)=="#" )
+		{
+			i=i+1;
+			flagf=1;
+		}
+		else
+		{
+			print $0 >> "tmp/f"i;
+		}		
+	}
+}
