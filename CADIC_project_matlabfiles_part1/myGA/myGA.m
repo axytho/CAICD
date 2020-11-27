@@ -19,6 +19,7 @@ function [population,it] = myGA(f,V,M,lb,ub)
     
     %% PARAMETER SWEEP
     parameterResult = [];
+    previousIntegral = 0;
     %for spread = 0.1:0.1:1.5
     %NC = NP;
 	%% GENETIC ALGORITHM
@@ -54,13 +55,17 @@ function [population,it] = myGA(f,V,M,lb,ub)
 			drawnow;
 			pause(0.001);
         end
-        it = it+1;
-        if sameFront
-            specialIt = specialIt + 1;
-        else
-            specialIt = 0;
-        end
+        if frontStop
+            it = it+1;
+            if sameFront
+                specialIt = specialIt + 1;
+            else
+                specialIt = 0;
+            end
 		runFlag = stopCriterion(specialIt);
+        else
+            
+        end
     end
     
     %parameterResult = [parameterResult, toc]
