@@ -1,3 +1,5 @@
+.option compat
+.lib model
 
 .global 0 
 
