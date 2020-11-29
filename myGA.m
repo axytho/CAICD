@@ -16,7 +16,7 @@ function [population,it] = myGA(f,V,M,lb,ub)
 	P = 0.5;     % probability of recombination
     spread = 0.6;
 	verbose = true; % (true) plots each iteration
-    frontStop = true;
+    frontStop = false;
     %% PARAMETER SWEEP
     parameterResult = [];
     previousIntegral = 0;
@@ -30,6 +30,9 @@ function [population,it] = myGA(f,V,M,lb,ub)
 	population = evaluatePopulation(population,f,N,V,M,lb,ub);
 
 	population = sortPopulation(population,V,M, NP);
+    
+    integrals = zeros(1, M-1);
+    previousIntegrals = zeros(1, M-1);
 
 	% Main loop
 	it = 1;
@@ -55,7 +58,7 @@ function [population,it] = myGA(f,V,M,lb,ub)
 			drawnow;
 			pause(0.001);
         end
-        if frontStop
+        if (frontStop) || (M==1)
             it = it+1;
             if sameFront
                 specialIt = specialIt + 1;
@@ -64,7 +67,17 @@ function [population,it] = myGA(f,V,M,lb,ub)
             end
 		runFlag = stopCriterion(specialIt);
         else
-            
+           for collapse=2:M
+               integrals(collapse-1) = trapz(population(1:NP, V+1), population(1:NP, V+collapse));
+           end
+           abs(previousIntegrals - integrals)
+           if any(abs(previousIntegrals - integrals) > 0.01)
+                specialIt = specialIt + 1;
+            else
+                specialIt = 0;
+           end
+		   runFlag = stopCriterion(specialIt);
+           previousIntegrals = integrals;
         end
     end
     
