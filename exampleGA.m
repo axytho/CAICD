@@ -22,7 +22,7 @@ population = myGA(@(x) benchmark(bm,x),V,M,lb,ub);
 
 % Show local and global optima of benchmark 2
 if (bm==2) % Change this to some other number to stop plotting!
-	bm2_ShowFunction
+	bm2_ShowFunction;
 elseif (bm>2)
 	%Plot solution
 	hold on
