@@ -19,6 +19,7 @@ ub = (5-4*(bm>2))*ones(1,V); % 5 for bm 1 and 2; 1 for ZDT functions
 
 % Use your implementation of GA
 population = myGA(@(x) benchmark(bm,x),V,M,lb,ub);
+result = population(:,1:V)
 
 % Show local and global optima of benchmark 2
 if (bm==2) % Change this to some other number to stop plotting!

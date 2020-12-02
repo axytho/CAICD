@@ -2,7 +2,7 @@ function [sorted, sameFront] = sortPopulation(unsorted,V,M, NP)
 
 if (M==1) % Single Objective
 	sorted = sortrows(unsorted, V+1);
-	
+	sameFront = 1;
 else % Multi-objective case : non-domination sorting
     
     %% Ranking
