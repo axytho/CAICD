@@ -4,7 +4,9 @@ function flag = stopCriterion(it)
 
     flag = 1;
     if it > 100 % Stop after 100 iterations
-        flag = 0;
+       flag = 0;
     end
+    %population(1:NP,(V+1):(V+M))
+    %flag = (sum(abs(diff(population(1:NP,(V+1):(V+M))))) > 1e-6);
 
 end

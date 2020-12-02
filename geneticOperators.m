@@ -1,4 +1,4 @@
-function children = geneticOperators(parents,f,N,NC,P,V,M,lb,ub)
+function children = geneticOperators(parents,f,N,NC,P,V,M,lb,ub, childSpread)
     childSpread= 0.6;
 	children = zeros(NC,V);
     u = rand(1,V);
