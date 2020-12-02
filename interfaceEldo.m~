@@ -23,28 +23,25 @@ function obj = interfaceEldo(dc_proto,x)
 %     dataAC = extractAC(ac_proto);
 %     
     % Example plots of data, showing how it is extracted for different instances
-%     for j=1:size(x,1)
-%         plot(dataTran{j}.time,dataTran{j}.X);
-%         drawnow;
-%         pause;
-%     end
-%     
-%     for j=1:size(x,1)
-%         loglog(dataAC{j}.f, sum([dataAC{j}.RX dataAC{j}.IX].^2,2) );
-%         drawnow;
-%         pause;
-%     end
+    for j=1:size(x,1)
+        plot(dataTran{j}.time,dataTran{j}.X);
+        drawnow;
+        pause;
+    end
     
+    for j=1:size(x,1)
+        loglog(dataAC{j}.f, sum([dataAC{j}.RX dataAC{j}.IX].^2,2) );
+        drawnow;
+        pause;
+    end
     
+    dataDC
     %% Form your objectives here!
     % The objectives you need (at least) are Gain-Bandwidth and Power, more are optional
 %     obj = zeros(size(x,1),2); % Change second dimension when adding more objectives!
-%     obj(:,1) = 9e-3; %power
-%     obj(:,2) = 10e6; %Gain-BW
+    obj(:,1) = 9e-3; %power
+    obj(:,2) = 10e6; %Gain-BW
     %obj(:,3) = ;
     
-    obj = zeros(size(x,1),2);
-    obj(:,1) = dataDC;
-    obj(:,2) = dataDC;
 end
 

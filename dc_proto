@@ -20,10 +20,9 @@ VINN vinn 0 dc 0.7
 VB vb 0 dc 0.7
 
 .dc data=list
-.data list W1 L1 W2 L2 W3 L3
+.data list W1 W2 W3 L1 L2 L3
 
 xxPARAMxx
 .enddata
 
-.printfile dc v(vout) file=dcResult
-.printfile dc i(vdd) file=dcResult
+.printfile dc i(VDD) file=dcResult
