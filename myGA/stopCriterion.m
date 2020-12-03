@@ -3,7 +3,7 @@ function flag = stopCriterion(it)
 %           0 if the GA must stop
 
     flag = 1;
-    if it > 100 % Stop after 200 iterations
+    if it > 20 % Stop after 200 iterations
        flag = 0;
     end
     %population(1:NP,(V+1):(V+M))
