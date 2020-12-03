@@ -37,7 +37,7 @@ function [population ,it] = myGA(f,V,M,lb,ub)
     integrals = zeros(1, M-1);
     previousIntegrals = zeros(1, M-1);
     integratedDiff = zeros(1, M-1);
-    zeroCounter = 1;
+    limitMultiplier = 1;
 	% Main loop
 	it = 1;
     specialIt = 1;
@@ -83,12 +83,12 @@ function [population ,it] = myGA(f,V,M,lb,ub)
            %(abs(previousIntegrals - integrals)*NC/integrals)/10
            integratedDiff = abs(integratedDiff + (previousIntegrals - integrals))
            %no problem going backward, but we don't overstep.
-           (sum(integrals)*NC.^2/100000)
-           if all(integratedDiff < (sum(integrals)*NC.^2/100000)*zeroCounter)
+           (sum(integrals)*NC.^2/100000*limitMultiplier)
+           if all(integratedDiff < (sum(integrals)*NC.^2/100000)*limitMultiplier)
                 specialIt = specialIt + 1;
             else
                 specialIt = 0;
-                zeroCounter = zeroCounter + 0.5;
+                limitMultiplier = limitMultiplier * 1.5;
                 integratedDiff = zeros(1, M-1);
            end
 		   runFlag = stopCriterion(specialIt);
