@@ -18,7 +18,6 @@ else % Multi-objective case : non-domination sorting
             pDominatesq = all(unsorted(p, (V+1):(V+M)) <= unsorted(q, (V+1):(V+M))) && any(unsorted(p, (V+1):(V+M)) < unsorted(q, (V+1):(V+M)));
             pDominatesq = pDominatesq && any(unsorted(p, 1:V) - unsorted(q, 1:V));
             qDominatesp = all(unsorted(p, (V+1):(V+M)) >= unsorted(q, (V+1):(V+M))) && any(unsorted(p, (V+1):(V+M)) > unsorted(q, (V+1):(V+M)));
-            qDominatesp = qDominatesp && any(unsorted(p, 1:V) - unsorted(q, 1:V));
             if pDominatesq
                 S(p, q) =  1;
             elseif (qDominatesp)
