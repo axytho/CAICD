@@ -77,7 +77,7 @@ function [population ,it] = myGA(f,V,M,lb,ub)
                integrals(collapse-1) = trapz(integralPop(:, 1), integralPop(:, collapse));
            end
            abs(previousIntegrals - integrals);
-           if all(abs(previousIntegrals - integrals) < 0.01)
+           if all(abs(previousIntegrals - integrals) < sum(integrals)/50)
                 specialIt = specialIt + 1;
             else
                 specialIt = 0;
