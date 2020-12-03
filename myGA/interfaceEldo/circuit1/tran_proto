@@ -1,0 +1,18 @@
+
+.global 0 
+
+.param X1=100 X2=0.1
+
+R01 vin vout 'X1'
+C01 vout 0 'X2'
+
+V0 vin 0 pulse( 0 3.3 0 1p 1m)
+
+.option hmax=1u
+.tran 1u 1m data=list
+
+.data list X1 X2
+xxPARAMxx
+.enddata
+
+.printfile tran v(vout) file=tranResult
