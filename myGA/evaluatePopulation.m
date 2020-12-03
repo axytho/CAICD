@@ -4,6 +4,6 @@ function evalpopulation = evaluatePopulation(population,f,N,V,M,lb,ub)
 	objectives = zeros(N,M);
 	
 	% Calculate objectives here
-    size(f(lb+(ub-lb).*population))
+    size(f(lb+(ub-lb).*population));
 	evalpopulation = [population , f(lb+(ub-lb).*population) ];
 end
