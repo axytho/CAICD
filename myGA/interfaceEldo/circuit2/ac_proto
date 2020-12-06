@@ -20,7 +20,6 @@ VINP vinp 0 dc 0.7 ac 0.1 180
 VINN vinn 0 dc 0.7 ac 0.1 
 VB vb 0 dc 0.7
 
-
 .ac dec 10 100 1G data=list
 
 .data list W1 W2 W3 L1 L2 L3

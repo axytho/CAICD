@@ -1,0 +1,31 @@
+
+.option compat
+.lib model
+
+.global 0 
+
+.param W1=100e8 L1=18e-8 W2=100e8 L2=18e-8 W3=100e8 L3=18e-8 W4=100e8 L4=18e-8 W5 =100e8 L5=18e-8
+
+M9 v1_9 vb vdd vdd CMOSP w='W5' l='L5'
+M1 v1_3 vinn v1_9 v1_9 CMOSP w='W1' l='L1'
+M2 v2_4 vinp v1_9 v1_9 CMOSP w='W1' l='L1'
+M3 v1_3 v1_3 0 0 CMOSN w='W2' l='L2'
+M4 v2_4 v2_4 0 0 CMOSN w='W2' l='L2'
+M5 v5_7 v1_3 0 0 CMOSN w='W3' l='L3'
+M6 vout v2_4 0 0 CMOSN w='W3' l='L3'
+M7 v5_7 v5_7 vdd vdd CMOSP w='W4' l='L4'
+M8 vout v5_7 vdd vdd CMOSP w='W4' l='L4'
+CL vout 0 'C '
+
+VDD vdd 0 dc 1.8
+VINP vinp 0 pulse( 0 1.8 0.49u 0.02u)
+VINN vinn 0 pulse( 0 1.8 0.49u 0.02u)
+VB vb 0 dc 0.7
+
+.tran 1n 1u data=list
+
+.data list W1 W2 W3 W4 W5 L1 L2 L3 L4 L5 C
+xxPARAMxx
+.enddata
+
+.printfile tran v(vin) v(vout) file=tranResult
