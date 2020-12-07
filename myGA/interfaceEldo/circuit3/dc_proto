@@ -4,7 +4,7 @@
 
 .global 0 
 
-.param W1=350e-9 L1=180e-9 W2=350e-9 L2=180e-9 W3=350e-9 L3=180e-9 W4=350e-9 L4=180e-9 W5=350e-9 L5=180e-9 VBias=0.7
+.param W1=350e-9 L1=180e-9 W2=350e-9 L2=180e-9 W3=350e-9 L3=180e-9 W4=350e-9 L4=180e-9 W5=350e-9 L5=180e-9 VBias=0.7 VInDC=0.7
 
 
 
@@ -19,12 +19,12 @@ M7 v5_7 v5_7 vdd vdd CMOSP w='W4' l='L4'
 M8 vout v5_7 vdd vdd CMOSP w='W4' l='L4'
 
 VDD vdd 0 dc 1.8
-VINP vinp 0 dc 0.7
-VINN vinn 0 dc 0.7
+VINP vinp 0 dc 'VInDC'
+VINN vinn 0 dc 'VInDC'
 VB vb 0 dc 'VBias'
 
 .dc data=list
-.data list W1 W2 W3 W4 W5 L1 L2 L3 L4 L5 VBias
+.data list W1 W2 W3 W4 W5 L1 L2 L3 L4 L5 VBias VInDC
 
 xxPARAMxx
 .enddata
