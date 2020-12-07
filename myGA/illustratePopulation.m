@@ -15,7 +15,7 @@ if (V==2)
 elseif (M==2)
     figure(1)
     clf;
-    loglog(population(:,V+1),population(:,V+2),'.','MarkerSize',25);
+    plot(population(:,V+1),population(:,V+2),'.','MarkerSize',25);
     title(['Objectives, Iteration ' num2str(it)])
     xlabel('O1');
     ylabel('O2');

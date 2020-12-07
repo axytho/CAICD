@@ -81,9 +81,9 @@ function [population ,it] = myGA(f,V,M,lb,ub)
            end
 
            %(abs(previousIntegrals - integrals)*NC/integrals)/10
-           integratedDiff = abs(integratedDiff + (previousIntegrals - integrals))
+           integratedDiff = abs(integratedDiff + (previousIntegrals - integrals));
            %no problem going backward, but we don't overstep.
-           (sum(integrals)*NC.^2/100000*limitMultiplier)
+           (sum(integrals)*NC.^2/100000*limitMultiplier);
            if all(integratedDiff < (sum(integrals)*NC.^2/100000)*limitMultiplier)
                 specialIt = specialIt + 1;
             else
