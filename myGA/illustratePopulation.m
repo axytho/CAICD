@@ -15,8 +15,18 @@ if (V==2)
 elseif (M==2)
     figure(1)
     clf;
+<<<<<<< HEAD
     plot(population(:,V+1),population(:,V+2),'.','MarkerSize',25);
+=======
+    loglog(10.^((population(:,V+1)-10)).*1.8,10.^(10-population(:,V+2)),'.','MarkerSize',25);
+>>>>>>> ff472b3951263c8961fb422a10aa2a06d0337c6c
     title(['Objectives, Iteration ' num2str(it)])
-    xlabel('O1');
-    ylabel('O2');
+    xlabel('Power (drained from VDD)');
+    ylabel('GBW');
+%     figure(1)
+%     clf;
+%     plot(population(:,V+1),population(:,V+2),'.','MarkerSize',25);
+%     title(['Objectives, Iteration ' num2str(it)])
+%     xlabel('O1');
+%     ylabel('O2');
 end

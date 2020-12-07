@@ -59,7 +59,7 @@ function obj = interfaceEldo(foldername,x)
     
     
     obj = zeros(size(x,1),2);
-    obj(:,1) = -dataDC;
-    obj(:,2) = 1./GBW;
+    obj(:,1) = 10 + log10(-dataDC);
+    obj(:,2) = 10 + log10(1./GBW);
 end
 
