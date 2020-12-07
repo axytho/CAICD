@@ -17,7 +17,7 @@ function obj = interfaceEldo(foldername,x)
 %     unix(['eldo interfaceEldo/' tran_proto '/tran ']);%> /dev/null']);
 %     dataTran = extractTran(tran_proto);
     
-%    Perform AC simulation of 'foldername'
+  % Perform AC simulation of 'foldername'
     injectValues(foldername,x,'ac');
     unix(['eldo interfaceEldo/' foldername '/ac ']);%> /dev/null']);
     dataAC = extractAC(foldername);
@@ -60,6 +60,7 @@ function obj = interfaceEldo(foldername,x)
     
     obj = zeros(size(x,1),2);
     obj(:,1) = 10 + log10(-dataDC);
+    %obj(:,2) = 10 + log10(-dataDC);
     obj(:,2) = 10 + log10(1./GBW);
 end
 
