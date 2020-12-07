@@ -1,0 +1,1185 @@
+  Run on vierre64.esat.kuleuven.be (Linux 4.18.0-193.28.1.el8_2.x86_64)
+
+-----------| System Information |---------------
+
+*** User  : r0666113
+*** OS    : CentOS Linux release 8.2.2004 (Core)  [VCO = aol]
+*** CPU   :
+    Intel Core Processor (Haswell, no TSX)
+    Number of physical processors     : 4
+    Hyper-Threading Technology        : disabled
+    Number of cpu cores               : 16
+    Number of logical processors      : 16
+*** Freq  : 2599.996MHz
+*** Cache : 16384 KB
+*** MEM   : 65933744 kB
+*** Date  : Wed Dec  2 17:11:54 2020
+
+*** Eldo VERSION : ELDO 2020.3 update1 (64 bits) Thu Aug 20 15:38:08 GMT 2020
+
+/esat/micas-data/software/Mentor/ams_2020.3/amsv/aol/bin/eldo_64.exe -i interfaceEldo/circuit1/tran
+
+
+***>  2-Dec-2020 17:11:54 - STARTING PARSING PHASE ...
+
+***** PRE-PROCESSING ...
+1******* 2-Dec-20 *******  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  *******17:11:54******
+
+0
+
+0****     INPUT LISTING                                               
+
+0***********************************************************************
+    2  .GLOBAL 0 
+    3  
+    4  .PARAM X1=100 X2=0.1
+    5  
+    6  R01 VIN VOUT 'X1'
+    7  C01 VOUT 0 'X2'
+    8  
+    9  V0 vin 0 pulse( 0 3.3 0 1p 1m)
+   10  
+   11  .OPTION hmax=1u
+   12  .tran 1u 1m data=list
+   13  
+   14  .DATA list X1 X2
+   15  + 9891.4126 1.6175e-09 
+   16  + 2533.8882 2.5254e-09 
+   17  + 3320.1303 1.6445e-09 
+   18  + 4571.1939 4.0324e-09 
+   19  + 1665.9529 4.4844e-09 
+   20  + 7156.8646 2.4031e-09 
+   21  + 4621.495 3.7421e-09 
+   22  + 9845.5168 2.1766e-09 
+   23  + 4619.6559 3.1225e-09 
+   24  + 6586.0475 4.3297e-09 
+   25  .ENDDATA
+   26  
+   27  .PRINTFILE tran v(vout) file=tranResult
+   28  .END
+
+End of file 
+
+
+***** 0  error(s). 
+***** 0  warning(s). 
+
+
+***>  2-Dec-2020 17:11:54 - PARSING completed: WALL CLOCK ELAPSED TIME 0s <***
+
+
+***>  2-Dec-2020 17:11:54 - STARTING ELABORATION PHASE ...
+Warning 220: In file "./interfaceEldo/circuit1/tran" line 9:
++    OBJECT "V0": Default values used for time specification : parameter TSAMPLE set to  1e+06ns.
+Warning 220: In file "./interfaceEldo/circuit1/tran" line 9:
++    OBJECT "V0": Default values used for time specification.
+
+----------------| Design Summary |-----------------
+3 elements
+2 nodes 
+1 sources
+
+Detail about objects and nodes found in the design:
+Number of nodes                     2
+Number of resistors                 1
+Number of capacitors                1
+Number of inductors                 0
+Number of voltage sources           1
+Number of current sources           0
+Number of dependent sources         0
+Number of diodes                    0
+Number of BJT                       0
+Number of JFET                      0
+Number of MOS                       0
+Number of SWITCHES                  0
+Number of transmission lines        0
+Total number of elements            3
+---------------------------------------------------
+
+***** 0  error(s). 
+***** 2  warning(s). 
+
+
+------------| Elaboration Information |------------
+***> Memory:
+Peak memory usage (MB): 50
+Virtual memory usage (MB): 449
+
+***> Inputs:
+1 input signals
+---------------------------------------------------
+Note 108: Acquiring license Analog Simulator Kernel (eldokernel)
+
+
+0************************************************************************************************************************
+
+
+run number 1 out of 10
+   value of parameter X1 is 9.891413E+03
+   value of parameter X2 is 1.617500E-09
+1************************************************************************************************************************
+
+*** DATE:  2-Dec-2020 17:11:54
+*** TITLE: NO_TITLE
+
+TEMPERATURE : 27.000000 degrees C
+
+
+
+
+1*************** 2-Dec-2020 ***********************  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  ***********************17:11:54*****************
+
+0NO_TITLE
+0****                 OPTION SUMMARY                                         TEMPERATURE =   27.000 DEG C
+
+0*************************************************************************************************************************
+
+
+
+
+
+*** DC Control Options : 
+
+GMIN           = 1.00e-12 NMAXSIZE       = 100000   ITL1           = 100      
+GRAMP          = 0        NETSIZE        = 100      VMINDC         = UNDEF    
+VMAXDC         = UNDEF    
+
+*** Initial Accuracy Control Options (May be adjusted during simulation): 
+
+ITOL           = 1.00e-06 EPS            = 5.00e-03 VNTOL          = 1.00e-06 
+RELTOL         = 1.00e-03 RELERR         = 5.00e-02 PIVREL         = 1.00e-03 
+PIVTOL         = 1.00e-16 ABSTOL         = 1.00e-12 FLXTOL         = 1.00e-11 
+MAXORD         = 2.00e+00 
+
+*** Time-step Control Options : 
+
+ZOOMTIME       = 1.00e+00 STEP           = 0.00e+00 STARTSMP       = 0.00e+00 
+FREQSMP        = 0.00e+00 COURESOL       = 0.00e+00 TRTOL          = 7.00e+00 
+HMIN           = 1.00e-12 ITL3           = 3        ITL4           = 13       
+FT             = 1.25e-01 DCLOG          = 1.00e+00 LVLTIM         = 2        
+LVLCNV         = 2        DVDT           = -1       RELVAR         = 1.50e-01 
+ABSVAR         = 2.00e-01 SAMPLE         = 0.00e+00 HMAX           = 1.00e-06 
+
+
+*** MosFet default Options : 
+
+SCALE          = 1.00e+00 SCALM          = 1.00e+00 SCALEBSIM      = 1.00e+00 
+DEFAD          = UNDEF    DEFAS          = UNDEF    DEFPD          = UNDEF    
+DEFPS          = UNDEF    DEFW           = 1.00e-04 DEFL           = 1.00e-04 
+DEFNRD         = UNDEF    DEFNRS         = UNDEF    XA             = 6.00e-06 
+LIMRMOS        = UNDEF    SHRINK         = 1.00e+00 
+
+*** General Information Options : 
+
+TUNING         = UNDEF    
+CPTIME         = UNDEF    STAT           = 0        TIMEDIV        = 0        
+SIMUDIV        = 10       SAVETIME       = 0        MAXTRAN        = 1000     
+MAXNODES       = 10000    MAXV           = 1.00e+13 LIMPROBE       = 10000    
+FLICKER_NOISE  = 0        THERMAL_NOISE  = 0        TNOM           = 2.70e+01 
+TMAX           = UNDEF    
+SPICDC         = 0        SPIOUT         = 0        NEWTON         = 1        
+OSR            = 0        TRAP           = 1        GEAR           = 0        
+BE             = 0        PROBEOP        = 0        NOLAT          = 0        
+NWLAT          = 0        ANALOG         = 0        BBDEBUG        = 0        
+NOSIZECHK      = 0        QTRUNC         = 1        UNBOUND        = 0        
+LCAPOP         = 0        NOAEX          = 0        AEX            = 0        
+AEX            = 0        STVER          = 0        MOTOROLA       = 0        
+AMS            = 0        ASPEC          = 0        INPUT          = 0        
+NOINIT         = 0        PSF            = 0        NOBIN          = 0        
+NOCOU          = 1        WL             = 0        NODE           = 0        
+LIST           = 0        SPI3BIN        = 0        SPI3ASC        = 0        
+NOMOD          = 0        NOBIN          = 0        NOCOU          = 1        
+RMOS           = 0        NWRMOS         = 1        NONWRMOS       = 0        
+USEDEFAP       = 0        NOASCII        = 0        ASCII          = 1        
+MIXED          = 0        SWITCH         = 0        USERSWITCH     = 0        
+TIMING         = 0        MODWL          = 1        ULOGIC         = 0        
+
+
+
+
+***>  2-Dec-2020 17:11:54 - ELABORATION completed: WALL CLOCK ELAPSED TIME 0s <***
+
+
+***>  2-Dec-2020 17:11:54 - STARTING SIMULATION PHASE ...
+
+***>  2-Dec-2020 17:11:54 - DC FOR TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+1*************** 2-Dec-2020 ***********************  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  ***********************17:11:54*****************
+
+0NO_TITLE
+0****                 INITIAL TRANSIENT SOLUTION                           TEMPERATURE =   27.000 DEG C
+
+0*************************************************************************************************************************
+
+
+  NODE         VOLTAGE      NODE         VOLTAGE    
+VIN          0.0         VOUT         0.0         
+
+
+   VOLTAGE SOURCE CURRENT
+
+NAME      CURRENT      VOLTAGE      POWER        
+V0         0.0          0.0          0.0         
+
+   TOTAL POWER DISSIPATION:  0.0        WATTS
+
+
+
+
+
+Eldo NEWTON: VNTOL=1.000000e-06 RELTOL=7.500000e-04
+
+................................................
+Simulation progress                : 10% (t = 100.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s   0)
+CPU Usage                          :   0%               (  0%)
+................................................
+Simulation progress                : 20% (t = 200.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s   0)
+CPU Usage                          :   0%               (  0%)
+................................................
+Simulation progress                : 30% (t = 300.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  10)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 40% (t = 400.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 50% (t = 500.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 76%)
+................................................
+Simulation progress                : 60% (t = 600.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 66%)
+................................................
+Simulation progress                : 70% (t = 700.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  20)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 80% (t = 800.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 90% (t = 900.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 90%)
+................................................
+Simulation progress                : 100% (t = 1.0000 M)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 83%)
+
+***>  2-Dec-2020 17:11:54 - TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+
+0************************************************************************************************************************
+
+
+run number 2 out of 10
+   value of parameter X1 is 2.533888E+03
+   value of parameter X2 is 2.525400E-09
+1************************************************************************************************************************
+
+*** DATE:  2-Dec-2020 17:11:54
+*** TITLE: NO_TITLE
+
+TEMPERATURE : 27.000000 degrees C
+
+
+***>  2-Dec-2020 17:11:54 - DC FOR TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+1*************** 2-Dec-2020 ***********************  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  ***********************17:11:54*****************
+
+0NO_TITLE
+0****                 INITIAL TRANSIENT SOLUTION                           TEMPERATURE =   27.000 DEG C
+
+0*************************************************************************************************************************
+
+
+  NODE         VOLTAGE      NODE         VOLTAGE    
+VIN          0.0         VOUT         0.0         
+
+
+   VOLTAGE SOURCE CURRENT
+
+NAME      CURRENT      VOLTAGE      POWER        
+V0         0.0          0.0          0.0         
+
+   TOTAL POWER DISSIPATION:  0.0        WATTS
+
+
+
+
+
+Eldo NEWTON: VNTOL=1.000000e-06 RELTOL=7.500000e-04
+
+................................................
+Simulation progress                : 10% (t = 100.9493 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  10)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 20% (t = 200.9493 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 30% (t = 300.9493 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 40% (t = 400.9493 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 50% (t = 500.9493 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  20)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 60% (t = 600.9493 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 70% (t = 700.9493 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 80% (t = 800.9493 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 90% (t = 900.9493 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 90%)
+................................................
+Simulation progress                : 100% (t = 1.0000 M)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  30)
+CPU Usage                          : 100%               (100%)
+
+***>  2-Dec-2020 17:11:54 - TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+
+0************************************************************************************************************************
+
+
+run number 3 out of 10
+   value of parameter X1 is 3.320130E+03
+   value of parameter X2 is 1.644500E-09
+1************************************************************************************************************************
+
+*** DATE:  2-Dec-2020 17:11:54
+*** TITLE: NO_TITLE
+
+TEMPERATURE : 27.000000 degrees C
+
+
+***>  2-Dec-2020 17:11:54 - DC FOR TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+1*************** 2-Dec-2020 ***********************  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  ***********************17:11:54*****************
+
+0NO_TITLE
+0****                 INITIAL TRANSIENT SOLUTION                           TEMPERATURE =   27.000 DEG C
+
+0*************************************************************************************************************************
+
+
+  NODE         VOLTAGE      NODE         VOLTAGE    
+VIN          0.0         VOUT         0.0         
+
+
+   VOLTAGE SOURCE CURRENT
+
+NAME      CURRENT      VOLTAGE      POWER        
+V0         0.0          0.0          0.0         
+
+   TOTAL POWER DISSIPATION:  0.0        WATTS
+
+
+
+
+
+Eldo NEWTON: VNTOL=1.000000e-06 RELTOL=7.500000e-04
+
+................................................
+Simulation progress                : 10% (t = 100.8594 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s   0)
+CPU Usage                          :   0%               (  0%)
+................................................
+Simulation progress                : 20% (t = 200.8594 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s   0)
+CPU Usage                          :   0%               (  0%)
+................................................
+Simulation progress                : 30% (t = 300.8594 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  10)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 40% (t = 400.8594 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 50% (t = 500.8594 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 76%)
+................................................
+Simulation progress                : 60% (t = 600.8594 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 66%)
+................................................
+Simulation progress                : 70% (t = 700.8594 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 58%)
+................................................
+Simulation progress                : 80% (t = 800.8594 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  20)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 90% (t = 900.8594 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 90%)
+................................................
+Simulation progress                : 100% (t = 1.0000 M)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 83%)
+
+***>  2-Dec-2020 17:11:55 - TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 1s <***
+
+
+
+
+
+
+0************************************************************************************************************************
+
+
+run number 4 out of 10
+   value of parameter X1 is 4.571194E+03
+   value of parameter X2 is 4.032400E-09
+1************************************************************************************************************************
+
+*** DATE:  2-Dec-2020 17:11:55
+*** TITLE: NO_TITLE
+
+TEMPERATURE : 27.000000 degrees C
+
+
+***>  2-Dec-2020 17:11:55 - DC FOR TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+1*************** 2-Dec-2020 ***********************  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  ***********************17:11:55*****************
+
+0NO_TITLE
+0****                 INITIAL TRANSIENT SOLUTION                           TEMPERATURE =   27.000 DEG C
+
+0*************************************************************************************************************************
+
+
+  NODE         VOLTAGE      NODE         VOLTAGE    
+VIN          0.0         VOUT         0.0         
+
+
+   VOLTAGE SOURCE CURRENT
+
+NAME      CURRENT      VOLTAGE      POWER        
+V0         0.0          0.0          0.0         
+
+   TOTAL POWER DISSIPATION:  0.0        WATTS
+
+
+
+
+
+Eldo NEWTON: VNTOL=1.000000e-06 RELTOL=7.500000e-04
+
+................................................
+Simulation progress                : 10% (t = 100.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  10)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 20% (t = 200.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 30% (t = 300.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 40% (t = 400.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 50% (t = 500.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 83%)
+................................................
+Simulation progress                : 60% (t = 600.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  20)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 70% (t = 700.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 80% (t = 800.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 90% (t = 900.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 95%)
+................................................
+Simulation progress                : 100% (t = 1.0000 M)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  30)
+CPU Usage                          : 100%               (100%)
+
+***>  2-Dec-2020 17:11:55 - TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+
+0************************************************************************************************************************
+
+
+run number 5 out of 10
+   value of parameter X1 is 1.665953E+03
+   value of parameter X2 is 4.484400E-09
+1************************************************************************************************************************
+
+*** DATE:  2-Dec-2020 17:11:55
+*** TITLE: NO_TITLE
+
+TEMPERATURE : 27.000000 degrees C
+
+
+***>  2-Dec-2020 17:11:55 - DC FOR TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+1*************** 2-Dec-2020 ***********************  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  ***********************17:11:55*****************
+
+0NO_TITLE
+0****                 INITIAL TRANSIENT SOLUTION                           TEMPERATURE =   27.000 DEG C
+
+0*************************************************************************************************************************
+
+
+  NODE         VOLTAGE      NODE         VOLTAGE    
+VIN          0.0         VOUT         0.0         
+
+
+   VOLTAGE SOURCE CURRENT
+
+NAME      CURRENT      VOLTAGE      POWER        
+V0         0.0          0.0          0.0         
+
+   TOTAL POWER DISSIPATION:  0.0        WATTS
+
+
+
+
+
+Eldo NEWTON: VNTOL=1.000000e-06 RELTOL=7.500000e-04
+
+................................................
+Simulation progress                : 10% (t = 100.0467 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s   0)
+CPU Usage                          :   0%               (  0%)
+................................................
+Simulation progress                : 20% (t = 200.0467 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s   0)
+CPU Usage                          :   0%               (  0%)
+................................................
+Simulation progress                : 30% (t = 300.0467 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s   0)
+CPU Usage                          :   0%               (  0%)
+................................................
+Simulation progress                : 40% (t = 400.0467 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  10)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 50% (t = 500.0467 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 76%)
+................................................
+Simulation progress                : 60% (t = 600.0467 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 66%)
+................................................
+Simulation progress                : 70% (t = 700.0467 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 58%)
+................................................
+Simulation progress                : 80% (t = 800.0467 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  20)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 90% (t = 900.0467 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 90%)
+................................................
+Simulation progress                : 100% (t = 1.0000 M)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 83%)
+
+***>  2-Dec-2020 17:11:55 - TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+
+0************************************************************************************************************************
+
+
+run number 6 out of 10
+   value of parameter X1 is 7.156865E+03
+   value of parameter X2 is 2.403100E-09
+1************************************************************************************************************************
+
+*** DATE:  2-Dec-2020 17:11:55
+*** TITLE: NO_TITLE
+
+TEMPERATURE : 27.000000 degrees C
+
+
+***>  2-Dec-2020 17:11:55 - DC FOR TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+1*************** 2-Dec-2020 ***********************  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  ***********************17:11:55*****************
+
+0NO_TITLE
+0****                 INITIAL TRANSIENT SOLUTION                           TEMPERATURE =   27.000 DEG C
+
+0*************************************************************************************************************************
+
+
+  NODE         VOLTAGE      NODE         VOLTAGE    
+VIN          0.0         VOUT         0.0         
+
+
+   VOLTAGE SOURCE CURRENT
+
+NAME      CURRENT      VOLTAGE      POWER        
+V0         0.0          0.0          0.0         
+
+   TOTAL POWER DISSIPATION:  0.0        WATTS
+
+
+
+
+
+Eldo NEWTON: VNTOL=1.000000e-06 RELTOL=7.500000e-04
+
+................................................
+Simulation progress                : 10% (t = 100.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s   0)
+CPU Usage                          :   0%               (  0%)
+................................................
+Simulation progress                : 20% (t = 200.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  10)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 30% (t = 300.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 40% (t = 400.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 50% (t = 500.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 83%)
+................................................
+Simulation progress                : 60% (t = 600.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 71%)
+................................................
+Simulation progress                : 70% (t = 700.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  20)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 80% (t = 800.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 90% (t = 900.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 95%)
+................................................
+Simulation progress                : 100% (t = 1.0000 M)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 86%)
+
+***>  2-Dec-2020 17:11:55 - TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+
+0************************************************************************************************************************
+
+
+run number 7 out of 10
+   value of parameter X1 is 4.621495E+03
+   value of parameter X2 is 3.742100E-09
+1************************************************************************************************************************
+
+*** DATE:  2-Dec-2020 17:11:55
+*** TITLE: NO_TITLE
+
+TEMPERATURE : 27.000000 degrees C
+
+
+***>  2-Dec-2020 17:11:55 - DC FOR TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+1*************** 2-Dec-2020 ***********************  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  ***********************17:11:55*****************
+
+0NO_TITLE
+0****                 INITIAL TRANSIENT SOLUTION                           TEMPERATURE =   27.000 DEG C
+
+0*************************************************************************************************************************
+
+
+  NODE         VOLTAGE      NODE         VOLTAGE    
+VIN          0.0         VOUT         0.0         
+
+
+   VOLTAGE SOURCE CURRENT
+
+NAME      CURRENT      VOLTAGE      POWER        
+V0         0.0          0.0          0.0         
+
+   TOTAL POWER DISSIPATION:  0.0        WATTS
+
+
+
+
+
+Eldo NEWTON: VNTOL=1.000000e-06 RELTOL=7.500000e-04
+
+................................................
+Simulation progress                : 10% (t = 100.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  10)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 20% (t = 200.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 30% (t = 300.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 40% (t = 400.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 50% (t = 500.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  20)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 60% (t = 600.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 70% (t = 700.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 80% (t = 800.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 90% (t = 900.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  30)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 100% (t = 1.0000 M)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  30)
+CPU Usage                          :   0%               (100%)
+
+***>  2-Dec-2020 17:11:55 - TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+
+0************************************************************************************************************************
+
+
+run number 8 out of 10
+   value of parameter X1 is 9.845517E+03
+   value of parameter X2 is 2.176600E-09
+1************************************************************************************************************************
+
+*** DATE:  2-Dec-2020 17:11:55
+*** TITLE: NO_TITLE
+
+TEMPERATURE : 27.000000 degrees C
+
+
+***>  2-Dec-2020 17:11:55 - DC FOR TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+1*************** 2-Dec-2020 ***********************  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  ***********************17:11:55*****************
+
+0NO_TITLE
+0****                 INITIAL TRANSIENT SOLUTION                           TEMPERATURE =   27.000 DEG C
+
+0*************************************************************************************************************************
+
+
+  NODE         VOLTAGE      NODE         VOLTAGE    
+VIN          0.0         VOUT         0.0         
+
+
+   VOLTAGE SOURCE CURRENT
+
+NAME      CURRENT      VOLTAGE      POWER        
+V0         0.0          0.0          0.0         
+
+   TOTAL POWER DISSIPATION:  0.0        WATTS
+
+
+
+
+
+Eldo NEWTON: VNTOL=1.000000e-06 RELTOL=7.500000e-04
+
+................................................
+Simulation progress                : 10% (t = 100.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s   0)
+CPU Usage                          :   0%               (  0%)
+................................................
+Simulation progress                : 20% (t = 200.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s   0)
+CPU Usage                          :   0%               (  0%)
+................................................
+Simulation progress                : 30% (t = 300.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  10)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 40% (t = 400.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 50% (t = 500.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 83%)
+................................................
+Simulation progress                : 60% (t = 600.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 71%)
+................................................
+Simulation progress                : 70% (t = 700.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  20)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 80% (t = 800.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 90% (t = 900.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 95%)
+................................................
+Simulation progress                : 100% (t = 1.0000 M)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 83%)
+
+***>  2-Dec-2020 17:11:55 - TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+
+0************************************************************************************************************************
+
+
+run number 9 out of 10
+   value of parameter X1 is 4.619656E+03
+   value of parameter X2 is 3.122500E-09
+1************************************************************************************************************************
+
+*** DATE:  2-Dec-2020 17:11:55
+*** TITLE: NO_TITLE
+
+TEMPERATURE : 27.000000 degrees C
+
+
+***>  2-Dec-2020 17:11:55 - DC FOR TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+1*************** 2-Dec-2020 ***********************  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  ***********************17:11:55*****************
+
+0NO_TITLE
+0****                 INITIAL TRANSIENT SOLUTION                           TEMPERATURE =   27.000 DEG C
+
+0*************************************************************************************************************************
+
+
+  NODE         VOLTAGE      NODE         VOLTAGE    
+VIN          0.0         VOUT         0.0         
+
+
+   VOLTAGE SOURCE CURRENT
+
+NAME      CURRENT      VOLTAGE      POWER        
+V0         0.0          0.0          0.0         
+
+   TOTAL POWER DISSIPATION:  0.0        WATTS
+
+
+
+
+
+Eldo NEWTON: VNTOL=1.000000e-06 RELTOL=7.500000e-04
+
+................................................
+Simulation progress                : 10% (t = 100.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  10)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 20% (t = 200.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 30% (t = 300.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 40% (t = 400.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 50% (t = 500.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  20)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 60% (t = 600.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 70% (t = 700.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 80% (t = 800.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 90% (t = 900.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 90%)
+................................................
+Simulation progress                : 100% (t = 1.0000 M)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  30)
+CPU Usage                          : 100%               (100%)
+
+***>  2-Dec-2020 17:11:55 - TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+
+0************************************************************************************************************************
+
+
+run number 10 out of 10
+   value of parameter X1 is 6.586047E+03
+   value of parameter X2 is 4.329700E-09
+1************************************************************************************************************************
+
+*** DATE:  2-Dec-2020 17:11:55
+*** TITLE: NO_TITLE
+
+TEMPERATURE : 27.000000 degrees C
+
+
+***>  2-Dec-2020 17:11:55 - DC FOR TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+
+1*************** 2-Dec-2020 ***********************  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  ***********************17:11:55*****************
+
+0NO_TITLE
+0****                 INITIAL TRANSIENT SOLUTION                           TEMPERATURE =   27.000 DEG C
+
+0*************************************************************************************************************************
+
+
+  NODE         VOLTAGE      NODE         VOLTAGE    
+VIN          0.0         VOUT         0.0         
+
+
+   VOLTAGE SOURCE CURRENT
+
+NAME      CURRENT      VOLTAGE      POWER        
+V0         0.0          0.0          0.0         
+
+   TOTAL POWER DISSIPATION:  0.0        WATTS
+
+
+
+
+
+Eldo NEWTON: VNTOL=1.000000e-06 RELTOL=7.500000e-04
+
+................................................
+Simulation progress                : 10% (t = 100.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s   0)
+CPU Usage                          :   0%               (  0%)
+................................................
+Simulation progress                : 20% (t = 200.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s   0)
+CPU Usage                          :   0%               (  0%)
+................................................
+Simulation progress                : 30% (t = 300.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  10)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 40% (t = 400.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               (100%)
+................................................
+Simulation progress                : 50% (t = 500.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 76%)
+................................................
+Simulation progress                : 60% (t = 600.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 66%)
+................................................
+Simulation progress                : 70% (t = 700.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  10)
+CPU Usage                          :   0%               ( 55%)
+................................................
+Simulation progress                : 80% (t = 800.0486 U)
+Thread CPU time                    :  0h  0mn  0s  10   ( 0h  0mn  0s  20)
+CPU Usage                          : 100%               (100%)
+................................................
+Simulation progress                : 90% (t = 900.0486 U)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 90%)
+................................................
+Simulation progress                : 100% (t = 1.0000 M)
+Thread CPU time                    :  0h  0mn  0s   0   ( 0h  0mn  0s  20)
+CPU Usage                          :   0%               ( 83%)
+
+***>  2-Dec-2020 17:11:55 - TRAN completed: TOTAL WALL CLOCK ELAPSED TIME 0s <***
+
+
+
+
+1*************** 2-Dec-2020 ***********************  ELDO 2020.3 update1 (64 bits)  (v20.3_1.1)  ***********************17:11:55*****************
+
+0NO_TITLE
+0****                 ACCOUNTING INFORMATION                                 TEMPERATURE =   27.000 DEG C
+
+0*************************************************************************************************************************
+
+
+
+
+
+
+-----------| Simulated Design Summary |------------
+
+Detail about objects and nodes simulated:
+Number of nodes                     2
+Number of intrinsic nodes           0
+Number of input signals             1
+Number of resistors                 1
+Number of floating capacitors       0
+Number of grounded capacitors       1
+Number of inductors                 0
+Number of voltage sources           1
+Number of current sources           0
+Number of dependent sources         0
+Number of diodes                    0
+Number of BJT                       0
+Number of JFET                      0
+Number of MOS                       0
+Number of SWITCHES                  0
+Number of transmission lines        0
+Total number of elements simulated  3
+Number of equations                 1
+Number of non-zero terms            1
+Percent Zeros                          0
+Number of Newton iterations         1026
+Average number of Newton iterations 1.005
+Number of accepted time steps       1021
+Number of rejected time steps       0
+      due to LTE                    0
+      due to Newton                 0
+Evaluation of active devices        0
+Virtual memory size (MB)            448
+Peak memory size (MB)      54
+---------------------------------------------------
+***>MESSAGE SUMMARY: 2 warnings
+
+***>  2-Dec-2020 17:11:55 - GLOBAL CPU TIME 0s 290ms <***
+
+
+***>  2-Dec-2020 17:11:55 - GLOBAL WALL CLOCK ELAPSED TIME 1s <***
+
+
+  Job started at  2-Dec-2020 17:11:54
+  Job end at      2-Dec-2020 17:11:55
+
+  Run on vierre64.esat.kuleuven.be (Linux 4.18.0-193.28.1.el8_2.x86_64)
+
+-----------------------------------------
+Maximum number of license(s) consumed:
+   1 Analog Simulator Kernel (eldokernel)
+
+Time spent acquiring licenses: 0.031 s (avg: 0.031 s, max: 0.031 s at Wed Dec  2 17:11:54 2020)
+Time spent releasing licenses: 0.001 s (avg: 0.001 s, max: 0.001 s at Wed Dec  2 17:11:55 2020)
+-----------------------------------------
+
+Simulation Finished.

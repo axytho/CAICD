@@ -1,0 +1,31 @@
+
+.option compat
+.lib model
+
+.global 0 
+
+.param W1=350e-9 L1=180e-9 W2=350e-9 L2=180e-9 W3=350e-9 L3=180e-9 W4=350e-9 L4=180e-9 W5=350e-9 L5=180e-9 VBias=0.7 VInDC=0.7
+
+M9 v1_9 vb vdd vdd CMOSP w='W5' l='L5'
+M1 v1_3 vinn v1_9 v1_9 CMOSP w='W1' l='L1'
+M2 v2_4 vinp v1_9 v1_9 CMOSP w='W1' l='L1'
+M3 v1_3 v1_3 0 0 CMOSN w='W2' l='L2'
+M4 v2_4 v2_4 0 0 CMOSN w='W2' l='L2'
+M5 v5_7 v1_3 0 0 CMOSN w='W3' l='L3'
+M6 vout v2_4 0 0 CMOSN w='W3' l='L3'
+M7 v5_7 v5_7 vdd vdd CMOSP w='W4' l='L4'
+M8 vout v5_7 vdd vdd CMOSP w='W4' l='L4'
+C0 vout 0 5e-12
+
+VDD vdd 0 dc 1.8
+VINP vinp 0 dc 'VInDC' ac 0.1 180
+VINN vinn 0 dc 'VInDC' ac 0.1 
+VB vb 0 dc 'VBias'
+
+.ac dec 10 100 1G data=list
+
+.data list W1 W2 W3 W4 W5 L1 L2 L3 L4 L5 VBias VInDC
+xxPARAMxx
+.enddata
+
+.printfile ac v(vout) file=acResult
