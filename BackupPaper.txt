@@ -1,0 +1,281 @@
+
+
+
+
+\documentclass[journal,a4paper]{IEEEtran}
+%
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[journal]{../sty/IEEEtran}
+
+
+
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{listings}
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  \usepackage[pdftex]{graphicx}
+ 
+  \graphicspath{figures}
+
+\else
+
+\fi
+
+%
+\usepackage{amsmath}
+
+
+
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+
+\begin{document}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
+\title{Computer Aided IC Design\\}
+%
+%
+% author names and IEEE memberships
+% note positions of commas and nonbreaking spaces ( ~ ) LaTeX will not break
+% a structure at a ~ so this keeps an author's name from being broken across
+% two lines.
+% use \thanks{} to gain access to the first footnote area
+% a separate \thanks must be used for each paragraph as LaTeX2e's \thanks
+% was not built to handle multiple paragraphs
+%
+
+\author{Jonas~Bertels, Hui~Xu}
+
+
+
+
+
+% The paper headers
+\markboth{Report Design of Computer Aided IC Design, December 2020}%
+{}
+% make the title area
+\maketitle
+\IEEEpeerreviewmaketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Introduction}
+
+\IEEEPARstart{T}{his} document describes the design of our Genetic Algorithm for circuit optimisation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Genetic Algorithm}
+The genetic algorithm used was NSGA-II \cite{NSGA}. As we tried to stay as closely as possible to this algorithm, we refer to the original paper for the implementation details and we will only discuss our observations of its effectiveness and implementation details on the stopping criteria which we designed ourselves.
+\subsection*{Sorting}
+The sorting algorithm provided by NSGA-II. Special caution had to be taken when the GA algorithm was used for circuits that 2 identical members of the population with slightly different objective functions (presumably caused by slight numerical errors in spice) would not dominate each other, and therefore create a new front when no new front should be created. (See the section of stop criteria).
+\subsection*{Genetic Operation}
+As \cite{NSGA} was not perfectly clear on the generation of $\beta$, we looked through its references and found that \cite{BetaExp} explained the generation of Beta nicely on page 9. After the children were generated the population was simply sorted and only the top were kept, with the amount being kept being equal to the number of parents that we used for every generation. As such, the population size was only used to generate an initial population and was for the most part irrelevant. The number of parents decided how many solution would be returned and the number of children decided how many evaluations would be performed every iteration.The parameters used are given in Table \ref{tab:parameters}.\\
+Our experience was that overall NSGA-II performed excellently, and that the way it used the sort algorithm to encourage spreading was so good that there was no need to include a minimum spread criterion in the stop criteria.
+\begin{table}[ht]
+    \renewcommand*{\arraystretch}{1.6}
+    \centering
+    \caption{Design specifications}
+    \begin{tabular}{|l|c|}
+        \hline
+        Population Size & 50 \\ \hline
+        Number of Children & 30 \\  \hline
+        Number of Parents  & 30 \\ \hline
+    \end{tabular}
+    \label{tab:parameters}
+\end{table}
+
+\subsection*{Stop Criteria}
+Whereas the algorithm was copied wholesale from \cite{NSGA}, no stop criteria were given in the paper. A search through the literature \cite{inproceedings} revealed that the following criteria were the most common:
+\begin{itemize}
+    \item A set number of generations
+    \item A set number of evaluations
+    \item Stopping when the chance of a new change was exceedingly low
+\end{itemize}
+In our algorithm, there was no difference between the first and second item. Our first implementation simply stopped at a 100 cycles. However it is clear that this is a very inflexible stopping criteria. The number of iterations can of course be turned into an input parameter, but this does not provide the "hands of" genetic algorithm that we were striving for, as the user would now have to guess how many iterations it would take to achieve the desired level of optimisation. Another method that was considered was to run, say, a hundred iterations, then provide the user with the option to continue  with another hundred if he is not satisfied with the results yet. However, this requires active user input, and does not fit our scenario of "run this GA while you go get a coffee". 
+\subsubsection*{FrontStop}
+Our first implementation of the third item simply checked whether the population had belonged to the same front for the last 20/50/100 iterations, and stop if this were the case. (Originally we considered the whole population, but as only the next generation counts in GA, only these should be accounted for) \\ It was found that the algorithm would stop too soon if only 20 or 50 iterations were checked, but that checking 100 iterations would give good results for the ZDT4 and ZDT6 test sets. However, there were to be problems in the circuit implementation (described later). The FrontStop implementation would work for any number of objectives without any modification, not just the 2 objectives that the specifications called for.
+
+\begin{lstlisting}[language=Matlab]
+integralPop = sortrows(
+population(1:NP, V+1:V+M), 1);
+for collapse=2:M
+   integrals(collapse-1) = 
+   trapz(
+   integralPop(:, 1), 
+   integralPop(:, collapse));
+end
+\end{lstlisting}
+\begin{algorithm}[ht]
+\SetAlgoLined
+
+  \For{index=2:M}{
+   integrals(index-1) = trapz(integralPop(:, 1), integralPop(:, index))\;
+ }
+\caption{Integration Algorithm}
+\end{algorithm}
+\subsubsection*{Integration}
+Our next implementation used the matlab function \verb|trapz| to integrate the second objective function over the first objective function. (To get the integration working properly, it was important to sort the objective functions according to the first objective function so that the same population would give consistent results, as \verb|trapz| does not automatically sort in the X direction before integrating). The difference between the integration result of this generation and the previous generation was then taken and if this was less than 0.01 for a 100 generations, then we would assume that the population had stopped improving. Later, the value 0.01 was changed to a fraction of the total integrated value as the circuit objective functions are necessarily normalized. (A more advanced version is given by Stop Criteria 1).
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.25]{figures/CircuitPareto.PNG}
+    \caption{Pareto curve of circuit (O1: current drain on VDD, O2: inverse GBW)}
+    \label{fig:circuitPareto}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.25]{figures/CircuitPareto2.PNG}
+    \caption{Pareto curve of circuit after 57 iterations (O1: current drain on VDD, O2: inverse GBW)}
+    \label{fig:circuitPareto2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.25]{figures/CircuitPareto4.PNG}
+    \caption{Pareto Log curve (O1: current drain on VDD, O2: inverse GBW)}
+    \label{fig:circuitPareto3}
+\end{figure}
+\subsubsection*{The infinite front change problem}
+When these two stopping schemes were used to stop the optimisation of the circuit, both failed. The reason for this was subtle: it was because our objective functions had a pareto front that looked like figure\ref{fig:circuitPareto}. The values seem to cluster around the center, but as the number of iterations increases, they spread out to the edges (figure \ref{fig:circuitPareto}), because the sorting algorithm prioritizes linear distance between the objectives. However, seen on a log scale (figure \ref{fig:circuitPareto3}), this means that the edges will have many values, while the center will have comparatively few. \\
+The following problem could then occur over 3 generations:
+\begin{enumerate}
+    \item A circuitA with $Obj1 = A1$ and $Obj2 = A2$ would be displaced by a circuitB with (for example)  $A1 << B1 = Obj1$, $Obj2 = B2 < A2$, but with circuitB being further away from the rest of the population and therefore being favored over A as they were technically in the same front.
+    \item The circuitB could then be displaced by a circuitC with a $C1$ so that $A1< C1 < B1$ and $B2 < A2 < C2$ but a distance that is also further away from the population than circuitB. CircuitC is straight up worse than circuitA since both objective values for circuitA are less than the objective values for circuitC.
+    \item CircuitA could then displace circuitC, as circuitA dominates circuitC. This would also trigger a front change and therefore prevent the FrontStop from working. Additionally, because the curve in figure \ref{fig:circuitPareto2} hugs the axes so closely, even a small change in the value at the center would have a large impact on the integration value, making it impossible to tell whether a change was caused by a legitimate improvement or by this process causing fluctuation in the final values.
+\end{enumerate}
+\subsubsection*{Improving the integration stop criteria}
+First we improved the maximum difference between the integration of this generation and the previous generation by scaling it with the size of the population, so that smaller populations would be more forgiving of large changes in integration and vice versa. \\
+Secondly, we improved by implementing the following algorithm:
+\begin{algorithm}[ht]
+\SetAlgoLined
+ runFlag = True\;
+ \While{runFlag}{
+  Genetic Algorithm\;
+  integratedDiff += (previousIntegral - integral)\;
+  \eIf{$integratedDiff < integral*(NumberOfChildren)^{2}/9000)$}{
+   \eIf{$counter == 100$}{
+   runFlag = false\;
+   }{
+   counter += 1\;
+   }
+   }{ 
+   counter = 0\;
+   integratedDiff = 0\;
+  }
+ }
+\caption{Stop Criteria 1}
+\end{algorithm}
+This algorithm had as great advantage that it was much less affected by shifts in population in the same front as these would result in relatively small changes in the integratedDiff and would cancel out before integratedDiff rises above our limit that resets the counter.\\
+However, while this worked well for the benchmark functions, it still didn't stop our circuit optimisation, where the changes in integration were so large that they would exceed our integration limit in one bound so to speak. There was effectively no quantitative difference between the changes of the integration value during optimisation and during the infinite loop that the algorithm would get stuck in at the end. This can be seen just by looking at the curve on figure \ref{fig:circuitPareto} and figure \ref{fig:circuitPareto2}, which hug the Objective axes closely. If the values in the center change by even a tiny bit, it has a large impact on the integration result.
+\subsubsection*{Combining all options: the limit-multiplier}
+After we realized that this last point, the only feasible solution was thus to use stopping criteria that would take into account the number of generations/evaluations that had occurred, but that was flexible enough to work for both circuits and the benchmark function. This was Stop Criteria 2 (given below).
+\begin{algorithm}[ht]
+\SetAlgoLined
+ runFlag = True\;
+ limitMultiplier = 1\;
+ \While{runFlag}{
+  Genetic Algorithm\;
+  integratedDiff += (previousIntegral - integral)\;
+  \eIf{$integratedDiff < integral*(NumberOfChildren)^{2}/100000)*limitMultiplier$}{
+   \eIf{$counter == 100$}{
+   runFlag = false\;
+   }{
+   counter += 1\;
+   }
+   }{ 
+   counter = 0\;
+   integratedDiff = 0\;
+   limitMultiplier = limitMultiplier * 1.5\;
+  }
+ }
+\caption{Stop Criteria 2}
+\end{algorithm}
+This algorithm allows the limitMultiplier to grow exponentially every time the algorithm determines that the integral is decreasing too quickly to stop. Eventually, no matter how large the integral value changes are, the algorithm will stop.
+\subsubsection*{Caveats}
+Just like with the set number of generations, it is possible to stop too early, especially if one has to go through many fronts and therefore many large integration changes before reaching the optimum. Its large advantage lies in the fact that in situations where the population becomes "stuck" in a non-optimal front, it will not stop until we have gone through 100 iterations without a large integration change. This makes it work well for ZDT4. Secondly, it is resistant to very large integration changes, but it does build up a tolerance if these changes are normal and should therefore be disregarded. Lastly, because w we do not take the absolute value of $(previousIntegra - integral$, small changes back and forth have no impact on the accumulator integratedDiff, and if they are large changes, the limit $integral*(NumberOfChildren)^{2}/100000)*limitMultiplier$ will increase until they become smaller than it over time thanks to the limitMultiplier.
+\subsection{Testing and Results}
+The following functions were tested: ZDT4 (figure \ref{fig:ZDT4}), ZDT6 (figure \ref{fig:ZDT6}), a simple amplifier circuit (circuit: figure \ref{fig:Circuit}, result shown in log scale on figure \ref{fig:circuitPareto3}) and an OTA (circuit: figure \ref{fig:OTA}, result shown on figure ). Because in the circuits case, we were trying to minimize the power but maximize the Gain Bandwidth, we used the inverse of the GBW as objective function 2. Therefore, to retrieve the achieved specification of any point on \ref{fig:circuitPareto3}, use the x-axis to find the DC current drain on the VDD (multiply by 1.8 Volt to find the power) and take the inverse of the y-axis to find the GBW.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.25]{figures/ZDT4.PNG}
+    \caption{Result of ZDT4 function}
+    \label{fig:ZDT4}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.25]{figures/ZDT6.PNG}
+    \caption{Result of ZDT6 function}
+    \label{fig:ZDT6}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.25]{figures/Circuit.PNG}
+    \caption{Simple amplifier circuit}
+    \label{fig:Circuit}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.25]{figures/OTA.png}
+    \caption{OTA circuit}
+    \label{fig:OTA}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Circuits Optimized}
+\subsection*{A simple amplifier}
+
+\subsection*{A simple OTA}
+
+
+
+
+
+
+
+
+
+
+
+% Can use something like this to put references on a page
+% by themselves when using endfloat and the captionsoff option.
+\ifCLASSOPTIONcaptionsoff
+  \newpage
+\fi
+
+
+
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://mirror.ctan.org/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+\bibliography{IEEEabrv,papers}
+
+
+
+
+
+% that's all folks
+\end{document}
+
+
